@@ -1,0 +1,25 @@
+generator:
+  model: "gpt-4o-mini"
+  system_prompt: "You are given a <task> to solve using reasoning, and maybe a sequence of previous thoughts. You can produce ONLY ONE NEXT thought, marked with <thought> tags. It must be a single line, one sentence, easy to verify. When you can produce a final answer, mark it with <final_answer> tags."
+  max_tokens: 1024
+  temperature: 1
+  n: 2
+
+verifier:
+  model: "gpt-4o-mini"
+  system_prompt: "You goal is to verify the correctness of the last <thought> or <final_answer> in the chain to solve the <task>. Only write a single digit: 1 or 0. 1 if the last thought is correct, 0 otherwise."
+  max_tokens: 1
+  temperature: 1
+  logprobs: true
+  top_logprobs: 2
+
+evaluator:
+  model: "gpt-4o-mini"
+  system_prompt: "You goal is to evaluate the helpfulness of the last <thought> in the chain to solve the <task>. Only write a single digit from 0 to 9. 0 means the thought is not helpful at all, 9 means it is extremely helpful."
+  max_tokens: 1
+  temperature: 1
+  logprobs: true
+  top_logprobs: 10
+
+dataset:
+  path: "data/dataset.jsonl" # placeholder
